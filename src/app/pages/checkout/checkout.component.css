@@ -1,0 +1,16 @@
+.page-container {
+    max-width:900px;
+    margin: auto;
+    padding: 30px;
+}
+
+.price-overview {
+    margin-top: 10px;
+}
+
+.price-overview span {
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color:rgba(0, 0, 0, 0.5);
+}

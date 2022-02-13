@@ -1,0 +1,59 @@
+
+
+<div class="toolbar-container">
+  <mat-toolbar>
+
+    <a routerLink="/" style="text-decoration: none;"><span style="font-family: 'Monoton', cursive; font-weight: bold; font-size:24px; color:black;">VENDOR</span></a>
+
+    <span class="spacer"></span>
+    
+    <button mat-icon-button aria-label="Login" routerLink="login" *ngIf="!this._authService.isUserSignedIn">
+      Login
+    </button>
+
+    <span class="spacer" *ngIf="!this._authService.isUserSignedIn"></span>
+    
+    <button mat-icon-button aria-label="Shop" routerLink="shop">
+      Shop
+    </button>
+
+    <span class="spacer"></span>
+    
+    <button mat-icon-button aria-label="Cart" routerLink="cart" *ngIf="this._authService.isUserSignedIn && this._cartService.cartList.length == 0">
+      Cart
+    </button>
+    <button mat-icon-button aria-label="Cart" routerLink="cart" [matBadge]="this._cartService.cartList.length" matBadgePosition="after" matBadgeColor="accent" *ngIf="this._authService.isUserSignedIn && this._cartService.cartList.length > 0">
+      Cart
+    </button>
+
+    <span class="spacer"></span>
+    
+    <button mat-icon-button aria-label="Profile" routerLink="user/profile" *ngIf="this._authService.isUserSignedIn">
+      Profile
+    </button>
+
+    <span class="spacer"></span>
+    
+    <button mat-icon-button aria-label="My Orders" routerLink="user/orders" *ngIf="this._authService.isUserSignedIn">
+      My Orders
+    </button>
+
+    <span class="spacer" *ngIf="this._authService.isUserSignedIn"></span>
+    
+    <button mat-icon-button aria-label="Sign out" routerLink="signout" *ngIf="this._authService.isUserSignedIn">
+      Sign Out
+    </button>
+
+    <!-- <span class="spacer" *ngIf="this._authService.isUserSignedIn"></span>
+    
+    <button mat-icon-button aria-label="Cart">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+
+    <mat-chip-list>
+      <mat-chip>{{ this._cartService.cartList.length? this._cartService.cartList.length : 0 }}</mat-chip>
+    </mat-chip-list> -->
+
+  </mat-toolbar>
+</div>
+<!-- <mat-progress-bar mode="query"></mat-progress-bar> -->
