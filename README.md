@@ -1,5 +1,5 @@
 # Vendor | eCommerce Web Application
-An interactive web client application featuring a great user experience built with Angular, relying on Google
+An interactive client web application featuring a great user experience built with Angular, relying on Google
 Firebase’s back-end services for user authentication, storage and content management.
 
 Technologies used: TypeScript, Angular, Google Firebase
