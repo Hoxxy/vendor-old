@@ -6,6 +6,11 @@ Client web application prototype that provides standard eCommerce funcionality:
 
 Technologies used: TypeScript, Angular, Google Firebase
 
+## Live Demo
+Go to http://hoxxy.github.io/. You must sign in to be able to see all the features. Please use the following credentials:
+User: demo@demo.com
+Pass: 123123123
+
 ## Project Walkthrough
 
 ![img 1](https://i.imgur.com/4PMHgD7.png)  
