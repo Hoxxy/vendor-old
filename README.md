@@ -1,10 +1,14 @@
 # Vendor | eCommerce Web Application
-Client web application prototype that provides standard eCommerce funcionality:
-- User registration and login system
-- Shopping cart: products can be added, removed, changed quantity; preview of the grand total; ability to apply a promo code
-- Users can rate and review products they've purchased  
+An interactive client web application featuring a great user experience built with Angular, relying on Google
+Firebase’s back-end services for user authentication, storage and content management.
 
 Technologies used: TypeScript, Angular, Google Firebase
+
+## Live Demo
+Go to: http://hoxxy.github.io/  
+You must sign in to be able to see all the features. Please use the following credentials:  
+User: demo@demo.com  
+Pass: 123123123  
 
 ## Project Walkthrough
 
