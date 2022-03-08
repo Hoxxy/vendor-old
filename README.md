@@ -2,7 +2,7 @@
 An interactive client web application featuring a great user experience built with Angular, relying on Google
 Firebase’s back-end services for user authentication, storage and content management.
 
-Technologies used: TypeScript, Angular, Google Firebase
+Technologies used: TypeScript, Angular, RxJS, Google Firebase
 
 ## Live Demo
 Go to: http://hoxxy.github.io/  
