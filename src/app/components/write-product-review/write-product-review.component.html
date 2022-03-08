@@ -1,8 +1,6 @@
-
 <div *ngIf="productPurchased" fxLayout="column">
     <h1>Write a review</h1>
-
-
+    
     <form  #f="ngForm" (ngSubmit)="this.submitReview(reviewText.value)" style="margin-top:10px;">
         <mat-dialog-content class="mat-typography">
             <star-rating-control [starType]="'svg'" fxLayoutAlign="start start" [rating]="0" id="ratingRef"></star-rating-control>

@@ -12,13 +12,11 @@ h1 {
 .cart-container {
     max-width: 740px;
     padding: 30px 50px;
-    /* border: 1px solid; */
 }
 
 .overview-container {
     max-width: 400px;
     padding: 30px 60px;
-    /* border: 1px solid; */
     background-color: #eee;
     max-height: 600px;
 }
@@ -62,10 +60,6 @@ mat-divider {
     max-width: 90px;
     max-height: 90px;
 }
-
-/* .product-info {
-    margin: 0px 8px;
-} */
 
 .product-info p {
     padding: 2px 15px;

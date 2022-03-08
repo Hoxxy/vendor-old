@@ -3,7 +3,6 @@
 }
 
 .toolbar-container {
-    /* background-color: rgb(228, 226, 218); */
     border-bottom: 1px solid #eee;
 }
 
@@ -11,7 +10,6 @@ mat-toolbar {
     width: 63%;
     height: 70px;
     margin: auto;
-    /* background-color: rgb(228, 226, 218); */
     background-color: transparent;
 }
 
@@ -27,9 +25,9 @@ mat-toolbar {
     height: 100%;
     align-items: center;
     justify-content: center;
-  }
+}
   
-  .example-sidenav {
+.example-sidenav {
     padding: 20px;
     border: solid 1px #eee;
-  }
+}

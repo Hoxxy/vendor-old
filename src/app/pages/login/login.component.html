@@ -1,9 +1,6 @@
-
 <mat-card>
     <mat-card-content>
-
         <mat-card-title style="margin-bottom:15px;">Log In</mat-card-title>
-
         <form  #f="ngForm" (ngSubmit)="_authService.signIn(emailInput.value, passwordInput.value)">
 
             <mat-form-field appearance="outline">
@@ -21,8 +18,6 @@
             </mat-form-field>
 
             <button mat-raised-button color="primary">Log in</button>
-            
-
         </form>
 
     </mat-card-content>

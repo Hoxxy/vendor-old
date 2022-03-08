@@ -80,7 +80,7 @@ export class ShopComponent implements OnInit {
     }); 
   }
 
-  addToCart = (product) => {
+  addToCart = (product: Product) => {
     this._cartService.addToCart({product,quantity:1});
 
     this._snackBar

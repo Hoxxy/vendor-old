@@ -1,6 +1,6 @@
  import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
- @Component({
+@Component({
      selector: 'quantity-control',
      styles: [`
      :host {

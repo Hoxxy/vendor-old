@@ -21,9 +21,7 @@ export class CartComponent {
       public _cartService: CartService,
       private _router: Router) {
       this._cartService.loadCart();
-  }
-
-  
+  };
 
   removeFromCart = (index: number) => {
       this._cartService.removeCart(index);
