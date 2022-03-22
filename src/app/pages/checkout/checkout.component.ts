@@ -13,52 +13,53 @@ import Swal from 'sweetalert2';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-
-  constructor(
-    private _Router: Router,
-    public _CartService: CartService,
-    private _AngularFirestore: AngularFirestore,
-    public _AuthService: AuthService) { }
-
+  
   private lastOrderId: number;
+  
+  constructor(
+    private router: Router,
+    private angularFirestore: AngularFirestore,
+    public cartService: CartService,
+    public authService: AuthService) { }
+
 
   ngOnInit(): void {
     this.getLastOrderId();
   }
 
   getLastOrderId(): void {
-    this._AngularFirestore.collection("config").doc("order_id").get().subscribe((data) => {
+    this.angularFirestore.collection("config").doc("order_id").get().subscribe((data) => {
       this.lastOrderId = data.get("order_id");
     });
   }
 
   updateOrderId(): void {
-    this._AngularFirestore.collection("config").doc("")
+    this.angularFirestore.collection("config").doc("")
   }
 
-  public calculateTotal() : number {
-    return this._CartService.subtotal - this._CartService.promoDeduction + Number(this._CartService.shippingCost);
+  public calculateTotal(): number {
+    return this.cartService.subtotal - this.cartService.promoDeduction + Number(this.cartService.shippingCost);
   }
 
   insertOrder(form: NgForm): void {
 
     var products = [];
     var quantity = [];
-    for (var i = 0; i < this._CartService.cartList.length; i++) {
-      products.push(this._CartService.cartList?.[i].product.id);
-      quantity.push(this._CartService.cartList?.[i].quantity);
+    for (var i = 0; i < this.cartService.cartList.length; i++) {
+      products.push(this.cartService.cartList?.[i].product.id);
+      quantity.push(this.cartService.cartList?.[i].quantity);
     }
-    
-    this._AngularFirestore.collection("config").doc("order_id").get().subscribe((data) => {
+
+    this.angularFirestore.collection("config").doc("order_id").get().subscribe((data) => {
 
       let orderId: number = data.get("order_id") + 1;
 
-      this._AngularFirestore.firestore.collection("config").doc("order_id").set({
+      this.angularFirestore.firestore.collection("config").doc("order_id").set({
         "order_id": orderId
       });
 
-      this._AngularFirestore.firestore.collection("orders").doc(orderId.toString()).set({
-        "user": this._AuthService.getUserFirestoreId(),
+      this.angularFirestore.firestore.collection("orders").doc(orderId.toString()).set({
+        "user": this.authService.getUserFirestoreId(),
         "id": orderId,
         "products": products,
         "quantity": quantity,
@@ -72,28 +73,28 @@ export class CheckoutComponent implements OnInit {
         "address2": form.controls["address2"].value,
         "total": this.calculateTotal()
       })
-      .then(() => {
-        this._CartService.cartList.length = 0;
+        .then(() => {
+          this.cartService.cartList.length = 0;
 
-        Swal.fire({
-          title: "Success!",
-          text: "You have successfully placed the order.",
-          icon: "success",
-          showCancelButton: false,
-          confirmButtonText: "OK",
-        }).then(() => {
-            this._Router.navigate(["/"]);
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: "Failed",
-          text: error.message,
-          icon: "error",
-          showCancelButton: false,
-          confirmButtonText: "Try again",
+          Swal.fire({
+            title: "Success!",
+            text: "You have successfully placed the order.",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonText: "OK",
+          }).then(() => {
+            this.router.navigate(["/"]);
+          });
         })
-      });
+        .catch((error) => {
+          Swal.fire({
+            title: "Failed",
+            text: error.message,
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonText: "Try again",
+          })
+        });
     })
   }
 
@@ -101,9 +102,9 @@ export class CheckoutComponent implements OnInit {
     var isFormValid: boolean = true;
 
     Object.keys(form.controls).forEach(id => {
-      if(form.controls[id].hasError('required') || form.controls[id].hasError('pattern')) isFormValid = false;
+      if (form.controls[id].hasError('required') || form.controls[id].hasError('pattern')) isFormValid = false;
     });
-    return isFormValid && !this._AuthService.countrySelect.hasError('required');
+    return isFormValid && !this.authService.countrySelect.hasError('required');
   }
 
 }
