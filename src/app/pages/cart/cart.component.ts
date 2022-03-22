@@ -11,40 +11,38 @@ import Swal from 'sweetalert2';
 })
 export class CartComponent {
 
-  public totalPrice: number;
-  public shippingMethod = new FormControl();
-  public selected = '15';
+  totalPrice: number;
+  selected = '15';
+  shippingMethod = new FormControl();
 
   displayedColumns: string[] = ['title', 'quantity', 'price'];
 
-  constructor(
-      public _cartService: CartService,
-      private _router: Router) {
-      this._cartService.loadCart();
+  constructor(public cartService: CartService, private router: Router) {
+    this.cartService.loadCart();
   };
 
   removeFromCart = (index: number) => {
-      this._cartService.removeCart(index);
+    this.cartService.removeCart(index);
   };
 
   changeQuantity = (newQuantity: number, index: number) => {
-    this._cartService.updateQuantity(index, newQuantity);
+    this.cartService.updateQuantity(index, newQuantity);
   };
 
-  checkout(shippingCost : any) {
-    this._cartService.shippingCost = Number(shippingCost);
-    this._router.navigate(['/checkout']);
+  checkout(shippingCost: any) {
+    this.cartService.shippingCost = Number(shippingCost);
+    this.router.navigate(['/checkout']);
   }
 
-  public calculateTotal() : number {
-    return this._cartService.subtotal - this._cartService.promoDeduction + Number(this.selected);
+  calculateTotal(): number {
+    return this.cartService.subtotal - this.cartService.promoDeduction + Number(this.selected);
   }
 
-  public promo(promoCode: string) {
+  promo(promoCode: string) {
     setTimeout(() => {
       if (promoCode === "20OFF") {
         // valid promo code
-        this._cartService.promoDeduction = this._cartService.subtotal * 0.2;
+        this.cartService.promoDeduction = this.cartService.subtotal * 0.2;
 
         Swal.fire({
           title: "Success",

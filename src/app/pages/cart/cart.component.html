@@ -1,9 +1,12 @@
-
 <div fxLayout="row" class="page-container">
-    <div fxLayout="column" class="cart-container" fxFlex="65" *ngIf="this._cartService.cartList.length > 0">
+    <div fxLayout="column" class="cart-container" fxFlex="65" *ngIf="this.cartService.cartList.length > 0">
         <div fxLayout="row">
-            <div fxFlex="50" style="text-align: left;"><h1>Shopping Cart</h1></div>
-            <div fxFlex="50" style="text-align: right;"><h1>{{ this._cartService.cartList.length }} Items</h1></div>
+            <div fxFlex="50" style="text-align: left;">
+                <h1>Shopping Cart</h1>
+            </div>
+            <div fxFlex="50" style="text-align: right;">
+                <h1>{{ this.cartService.cartList.length }} Items</h1>
+            </div>
         </div>
 
         <mat-divider></mat-divider>
@@ -15,19 +18,23 @@
             <div fxFlex="20" style="text-align: center;">Total</div>
         </div>
 
-        <div fxLayout="row" class="cart-item" *ngFor="let cart of this._cartService.cartList; let i = index">
+        <div fxLayout="row" class="cart-item" *ngFor="let cart of this.cartService.cartList; let i = index">
             <div fxFlex="40" fxLayout="row">
                 <div class="product-image">
                     <img [src]="cart.product.image">
                 </div>
                 <div class="product-info" fxLayout="column">
                     <p fxFlex="80" class="product-name" fxLayoutAlign="start center">{{ cart.product.title }}</p>
-                    <p fxFlex="20" class="product-remove" fxLayoutAlign="start center" (click)="removeFromCart(i)">Remove</p>
+                    <p fxFlex="20" class="product-remove" fxLayoutAlign="start center" (click)="removeFromCart(i)">
+                        Remove</p>
                 </div>
             </div>
-            <div fxFlex="20" fxLayoutAlign="center center"><quantity-control [quantity]="cart.quantity" (onChange)="changeQuantity($event, i)"></quantity-control></div>
+            <div fxFlex="20" fxLayoutAlign="center center">
+                <quantity-control [quantity]="cart.quantity" (onChange)="changeQuantity($event, i)"></quantity-control>
+            </div>
             <div fxFlex="20" fxLayoutAlign="center center" class="item-price">€{{ cart.product.price.toFixed(2) }}</div>
-            <div fxFlex="20" fxLayoutAlign="center center" class="item-price">€{{ (cart.product.price * cart.quantity).toFixed(2) }}</div>
+            <div fxFlex="20" fxLayoutAlign="center center" class="item-price">€{{ (cart.product.price *
+                cart.quantity).toFixed(2) }}</div>
         </div>
 
         <div>
@@ -35,10 +42,14 @@
         </div>
     </div>
 
-    <div fxLayout="column" class="cart-container" fxFlex="65" *ngIf="this._cartService.cartList.length <= 0">
+    <div fxLayout="column" class="cart-container" fxFlex="65" *ngIf="this.cartService.cartList.length <= 0">
         <div fxLayout="row">
-            <div fxFlex="50" style="text-align: left;"><h1>Shopping Cart</h1></div>
-            <div fxFlex="50" style="text-align: right;"><h1>{{ this._cartService.cartList.length }} Items</h1></div>
+            <div fxFlex="50" style="text-align: left;">
+                <h1>Shopping Cart</h1>
+            </div>
+            <div fxFlex="50" style="text-align: right;">
+                <h1>{{ this.cartService.cartList.length }} Items</h1>
+            </div>
         </div>
 
         <mat-divider></mat-divider>
@@ -47,7 +58,9 @@
     </div>
 
     <div fxLayout="column" class="overview-container" fxFlex="35" fxLayoutAlign="start start">
-        <div><h1>Order Summary</h1></div>
+        <div>
+            <h1>Order Summary</h1>
+        </div>
 
         <mat-divider></mat-divider>
 
@@ -64,11 +77,11 @@
                 </mat-select>
             </mat-form-field>
 
-            
+
             <form (ngSubmit)="this.promo(promoCode.value)" fxLayout="column">
                 <span>Promo Code</span>
                 <mat-form-field appearance="outline">
-                    <input type="text" ngModel matInput name="promoCode" #promoCode="ngModel" >
+                    <input type="text" ngModel matInput name="promoCode" #promoCode="ngModel">
                     <mat-hint>Use the code "20OFF" to get a 20% discount.</mat-hint>
                 </mat-form-field>
 
@@ -83,7 +96,7 @@
             <div class="price-overview">
                 <div fxLayout="row">
                     <span fxFlex="50" fxLayoutAlign="start">Subtotal</span>
-                    <span fxFlex="50" fxLayoutAlign="end">{{ this._cartService.subtotal.toFixed(2) }}</span>
+                    <span fxFlex="50" fxLayoutAlign="end">{{ this.cartService.subtotal.toFixed(2) }}</span>
                 </div>
 
                 <div fxLayout="row">
@@ -93,7 +106,7 @@
 
                 <div fxLayout="row">
                     <span fxFlex="50" fxLayoutAlign="start">Promo code</span>
-                    <span fxFlex="50" fxLayoutAlign="end">€-{{ this._cartService.promoDeduction.toFixed(2) }}</span>
+                    <span fxFlex="50" fxLayoutAlign="end">€-{{ this.cartService.promoDeduction.toFixed(2) }}</span>
                 </div>
 
                 <mat-divider style="margin: 10px 0px;"></mat-divider>
@@ -107,4 +120,4 @@
             <button mat-raised-button color="primary" id="checkout" (click)="checkout(selected)">Checkout</button>
         </div>
     </div>
-</div> 
+</div>
