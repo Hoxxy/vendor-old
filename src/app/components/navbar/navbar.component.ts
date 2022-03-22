@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth';
 import { CartService } from 'src/app/shared/services/cart.service';
 
@@ -7,18 +7,9 @@ import { CartService } from 'src/app/shared/services/cart.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
 
-  cartItems : number = 0;
+export class NavbarComponent {
+  // cartItems : number = 0;
 
-  constructor(
-    public _authService: AuthService,
-    public _cartService: CartService) {
-    
-   }
-
-  ngOnInit(): void {
-    
-  }
-
+  constructor(public authService: AuthService, public cartService: CartService) { }
 }
