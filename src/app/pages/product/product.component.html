@@ -4,7 +4,8 @@
         <ol class="product-breadcrumbs">
             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
             <li class="breadcrumb-item"> / <a routerLink="/shop">Shop</a></li>
-            <li class="breadcrumb-item"> / <a routerLink="/shop" [queryParams]="{category: product.category}">{{ category.title }}</a></li>
+            <li class="breadcrumb-item"> / <a routerLink="/shop" [queryParams]="{category: product.category}">{{
+                    category.title }}</a></li>
             <li class="breadcrumb-item"> / {{ product.title }}</li>
         </ol>
 
@@ -17,40 +18,48 @@
                     <div class="product-brand">{{ category.title }}</div>
                     <h1 class="product-title">{{ product.title }}</h1>
                     <div class="product-price" *ngIf="product.stock">€{{ product.price.toFixed(2) }}</div>
-                    <div class="product-price" *ngIf="!product.stock"><span style="text-decoration: line-through;">€{{ product.price.toFixed(2) }}</span> - <i>Out of stock</i></div>
+                    <div class="product-price" *ngIf="!product.stock"><span style="text-decoration: line-through;">€{{
+                            product.price.toFixed(2) }}</span> - <i>Out of stock</i></div>
                     <div class="product-description">{{ product.description }}</div>
                 </div>
                 <div class="product-details-button absolute-center" fxLayout="row">
                     <quantity-control [quantity]="1" (onChange)="changeQuantity($event)"></quantity-control>
                     <div matTooltip="This product is currently out of stock" [matTooltipDisabled]="product.stock">
-                        <button mat-button class="product-cart-button" [disabled]="!product.stock" (click)="addToCart(product)">Add to cart</button>
+                        <button mat-button class="product-cart-button" [disabled]="!product.stock"
+                            (click)="addToCart(product)">Add to cart</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="review-container" *ngIf="!this._ReviewService.reviews.length">
+        <div class="review-container" *ngIf="!this.reviewService.reviews.length">
             <div fxLayout="column" class="review-container-header">
                 <h2>Reviews (0)</h2>
                 <p class="no-reviews">Be the first person to review this product!</p>
-                <div matTooltip="You're not signed in" [matTooltipDisabled]="this._AuthService.isUserSignedIn" matTooltipPosition="below" class="no-reviews-btn">
-                    <button mat-flat-button color="accent" class="no-reviews-btn" (click)="openReviewDialog()" [disabled]="!this._AuthService.isUserSignedIn">Write a review</button>
+                <div matTooltip="You're not signed in" [matTooltipDisabled]="this.authService.isUserSignedIn"
+                    matTooltipPosition="below" class="no-reviews-btn">
+                    <button mat-flat-button color="accent" class="no-reviews-btn" (click)="openReviewDialog()"
+                        [disabled]="!this.authService.isUserSignedIn">Write a review</button>
                 </div>
             </div>
         </div>
 
-        <div fxLayout="column" class="review-container" *ngIf="this._ReviewService.reviews.length">
+        <div fxLayout="column" class="review-container" *ngIf="this.reviewService.reviews.length">
             <div fxLayout="row" class="review-container-header">
-                <h2>Reviews ({{this._ReviewService.reviews.length}})</h2>
-                <star-rating [starType]="'svg'" [rating]="this._ReviewService.avgRating" [labelText]="this._ReviewService.avgRating.toFixed(2)" labelPosition="right" [readOnly]="true"></star-rating>
-                
-                <div matTooltip="You're not signed in" [matTooltipDisabled]="this._AuthService.isUserSignedIn" matTooltipPosition="above" class="review-write">
-                    <button mat-flat-button color="accent" class="review-write-btn" (click)="openReviewDialog()" [disabled]="!this._AuthService.isUserSignedIn">Write a review</button>
+                <h2>Reviews ({{this.reviewService.reviews.length}})</h2>
+                <star-rating [starType]="'svg'" [rating]="this.reviewService.avgRating"
+                    [labelText]="this.reviewService.avgRating.toFixed(2)" labelPosition="right" [readOnly]="true">
+                </star-rating>
+
+                <div matTooltip="You're not signed in" [matTooltipDisabled]="this.authService.isUserSignedIn"
+                    matTooltipPosition="above" class="review-write">
+                    <button mat-flat-button color="accent" class="review-write-btn" (click)="openReviewDialog()"
+                        [disabled]="!this.authService.isUserSignedIn">Write a review</button>
                 </div>
             </div>
 
 
-            <div class="review" fxLayout="column" *ngFor="let review of this._ReviewService.reviews; let i = index">
+            <div class="review" fxLayout="column" *ngFor="let review of this.reviewService.reviews; let i = index">
                 <div class="review-details" fxLayout="row">
                     <div class="review-author">{{ review.displayname }}</div>
                     <span class="review-spacer">&#183;</span>
