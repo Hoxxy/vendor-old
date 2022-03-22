@@ -1,11 +1,13 @@
 <div *ngIf="productPurchased" fxLayout="column">
     <h1>Write a review</h1>
-    
-    <form  #f="ngForm" (ngSubmit)="this.submitReview(reviewText.value)" style="margin-top:10px;">
+
+    <form #f="ngForm" (ngSubmit)="this.submitReview(reviewText.value)" style="margin-top:10px;">
         <mat-dialog-content class="mat-typography">
-            <star-rating-control [starType]="'svg'" fxLayoutAlign="start start" [rating]="0" id="ratingRef"></star-rating-control>
+            <star-rating-control [starType]="'svg'" fxLayoutAlign="start start" [rating]="0" id="ratingRef">
+            </star-rating-control>
             <mat-form-field appearance="fill">
-                <textarea matInput ngModel name="review" #reviewText="ngModel" placeholder="Write your review here..." cdkTextareaAutosize cdkAutosizeMaxRows="10" required></textarea>
+                <textarea matInput ngModel name="review" #reviewText="ngModel" placeholder="Write your review here..."
+                    cdkTextareaAutosize cdkAutosizeMaxRows="10" required></textarea>
             </mat-form-field>
         </mat-dialog-content>
         <mat-dialog-actions fxAlign="end">
@@ -23,7 +25,7 @@
         - You haven't purchased this product.<br />
         - You order hasn't been marked as Finished.
     </mat-dialog-content>
-    
+
     <mat-dialog-actions fxAlign="end">
         <button mat-flat-button mat-dialog-close>I understand</button>
     </mat-dialog-actions>

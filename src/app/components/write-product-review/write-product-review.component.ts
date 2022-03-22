@@ -1,46 +1,40 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ReviewService } from 'src/app/shared/services/review.service';
 
 
 @Component({
   selector: 'app-write-product-review',
-  templateUrl: './write-product-review.component.html',
-  styleUrls: ['./write-product-review.component.css']
+  templateUrl: './write-product-review.component.html'
 })
-export class WriteProductReviewComponent implements OnInit {
+
+export class WriteProductReviewComponent {
 
   productPurchased: boolean;
   productId: number;
 
   constructor(
-    private _ReviewService: ReviewService,
-    private _MatDialog: MatDialog,
+    private reviewService: ReviewService,
+    private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: {
       productPurchased: boolean,
-      productId: number 
+      productId: number
     }
-  ) { 
+  ) {
     this.productPurchased = this.data.productPurchased;
     this.productId = this.data.productId;
   }
 
-
-  ngOnInit(): void {
-  }
-
-  submitReview(reviewText: String) : void {
+  submitReview(reviewText: String): void {
     let rating: number = 0;
-    for (let i = 0; i <= 5; i++)
-    {
-      if (document.getElementById("ratingRef").getElementsByClassName("value-"+i).item(0) !== null) {
+    for (let i = 0; i <= 5; i++) {
+      if (document.getElementById("ratingRef").getElementsByClassName("value-" + i).item(0) !== null) {
         rating = i;
         break;
       }
     }
 
-    this._MatDialog.closeAll();
-    this._ReviewService.insertReview(reviewText, this.productId, rating);
+    this.matDialog.closeAll();
+    this.reviewService.insertReview(reviewText, this.productId, rating);
   }
-
 }
