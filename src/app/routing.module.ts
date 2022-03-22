@@ -23,13 +23,13 @@ const routes: Routes = [
     { path: 'product/:id', component: ProductComponent },
     { path: 'cart', component: CartComponent },
     { path: 'checkout', component: CheckoutComponent },
-    { path: '**', component:  NotFoundComponent},
+    { path: '**', component: NotFoundComponent },
 ];
 
-@NgModule ({
-    imports: [ RouterModule.forRoot(routes) ],
+@NgModule({
+    imports: [RouterModule.forRoot(routes)],
 
-    exports: [ RouterModule ]
+    exports: [RouterModule]
 })
 
-export class RoutingModule {}
+export class RoutingModule { }
