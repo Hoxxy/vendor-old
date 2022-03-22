@@ -10,17 +10,17 @@ import { AuthService } from 'src/app/shared/services/auth';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(public _authService: AuthService, private _Router: Router) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    if (this._authService.isUserSignedIn) {
-      this._Router.navigate(["/"]);
+    if (this.authService.isUserSignedIn) {
+      this.router.navigate(["/"]);
     }
   }
 
-  checkPasswords(pass1: NgModel, pass2: NgModel) : void {
+  checkPasswords(pass1: NgModel, pass2: NgModel): void {
     if (pass1.value !== pass2.value) {
-      pass2.control.setErrors( { "notSame": true } );
+      pass2.control.setErrors({ "notSame": true });
     }
     else {
       pass2.control.setErrors(null);
@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
     var isFormValid: boolean = true;
 
     Object.keys(form.controls).forEach(id => {
-      if(form.controls[id].hasError('required') || form.controls[id].hasError('pattern')) isFormValid = false;
+      if (form.controls[id].hasError('required') || form.controls[id].hasError('pattern')) isFormValid = false;
     });
     return isFormValid && !form.controls["password"]?.hasError("minlength") && !form.controls["passwordRepeat"]?.hasError("matched");
   }
