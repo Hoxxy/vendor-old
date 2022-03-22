@@ -1,8 +1,8 @@
 table {
-    width:100%;
-    max-width:800px;
-    margin: 2em auto;
-  }
+  width: 100%;
+  max-width: 800px;
+  margin: 2em auto;
+}
 
 .page-container {
   max-width: 1140px;
@@ -12,12 +12,12 @@ table {
 }
 
 .page-container h1 {
-    font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 @media screen and (max-width: 992px) {
   table {
-      margin-left: 0 30px;
+    margin-left: 0 30px;
   }
 }
 
@@ -46,8 +46,8 @@ tr.element-row:not(.expanded-row):active {
 
 .product-image img {
   padding: 10px;
-    max-width: 45px;
-    max-height: 45px;
+  max-width: 45px;
+  max-height: 45px;
 }
 
 .product-name {
