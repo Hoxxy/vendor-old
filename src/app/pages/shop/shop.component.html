@@ -22,11 +22,13 @@
         <div fxLayout="row wrap" fxLayout.lt-md="column" style="width:100%;margin:auto;padding-top:20px;">
             <div fxFlex="33" *ngFor="let product of productList; let i = index">
                 <div class="image-container">
-                    <div class="product-image" [ngStyle]="{'background-image': 'url(./assets/images/product-' + product.id + '.jpg)'}"></div>
+                    <div class="product-image"
+                        [ngStyle]="{'background-image': 'url(./assets/images/product-' + product.id + '.jpg)'}"></div>
                     <div class="overlay">
                         <button mat-flat-button [routerLink]="['/product',i+1]">View Details</button>
                         <div matTooltip="This product is currently out of stock" [matTooltipDisabled]="product.stock">
-                            <button mat-flat-button [disabled]="!product.stock" (click)="addToCart(product)">Add to cart</button>
+                            <button mat-flat-button [disabled]="!product.stock" (click)="addToCart(product)">Add to
+                                cart</button>
                         </div>
                     </div>
                 </div>

@@ -22,15 +22,15 @@ export class ShopComponent implements OnInit {
   public paramCategory: any = null;
   public paramPrice: any = null;
 
-  constructor(private _snackBar: MatSnackBar,
-    private _route: ActivatedRoute,
-    private _router: Router, 
-    private _categoryService: CategoryService,
-    private _productService: ProductService,
-    private _cartService: CartService) { }
+  constructor(private snackBar: MatSnackBar,
+    private route: ActivatedRoute,
+    private router: Router,
+    private categoryService: CategoryService,
+    private productService: ProductService,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
-    this._route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       this.paramCategory = params['category'];
       this.paramPrice = params['price']
 
@@ -46,52 +46,51 @@ export class ShopComponent implements OnInit {
     });
   }
 
-  getCategoryById = (id : number) => {
-    this.subC = this._categoryService.getCategories('./assets/mock-data/categories.json')
-    .subscribe(res => {
-      this.currentCategory = res[id-1];
-    })
+  getCategoryById = (id: number) => {
+    this.subC = this.categoryService.getCategories('./assets/mock-data/categories.json')
+      .subscribe(res => {
+        this.currentCategory = res[id - 1];
+      })
   }
 
-  getCategoryByName = (name: string) =>  {
-    this.subC = this._categoryService.getCategories('./assets/mock-data/categories.json')
-    .subscribe(res => {
-      let categoryList: Array<any> = res as Array<Category>;
-      this.currentCategory = categoryList.find(categoryItem => categoryItem.idReadable === name.toLowerCase());
-    })
+  getCategoryByName = (name: string) => {
+    this.subC = this.categoryService.getCategories('./assets/mock-data/categories.json')
+      .subscribe(res => {
+        let categoryList: Array<any> = res as Array<Category>;
+        this.currentCategory = categoryList.find(categoryItem => categoryItem.idReadable === name.toLowerCase());
+      })
   }
 
   loadProducts = (price?: any) => {
-    this.subP = this._productService.getProducts('./assets/mock-data/products.json')
-    .subscribe(res => {
-      this.productList = res as Array<Product>;
+    this.subP = this.productService.getProducts('./assets/mock-data/products.json')
+      .subscribe(res => {
+        this.productList = res as Array<Product>;
 
-      if (this.paramCategory)
-      {
-        this.productList = this.productList.filter(item => item.category == this.currentCategory.id);
-      }
+        if (this.paramCategory) {
+          this.productList = this.productList.filter(item => item.category == this.currentCategory.id);
+        }
 
-      if (this.paramPrice === "cheap") {
-        this.productList = this.productList.filter(item => item.price < 200.0)
-      }
-      else if (this.paramPrice === "premium") {
-        this.productList = this.productList.filter(item => item.price >= 200.0)
-      }
-    }); 
+        if (this.paramPrice === "cheap") {
+          this.productList = this.productList.filter(item => item.price < 200.0)
+        }
+        else if (this.paramPrice === "premium") {
+          this.productList = this.productList.filter(item => item.price >= 200.0)
+        }
+      });
   }
 
   addToCart = (product: Product) => {
-    this._cartService.addToCart({product,quantity:1});
+    this.cartService.addToCart({ product, quantity: 1 });
 
-    this._snackBar
-    .open("Added to the shopping cart.", "View cart", { duration: 4000 })
-    .afterDismissed().subscribe(info => {
-      if (info.dismissedByAction === true) {
-        this._router.navigate(['/cart']);
-      }
-    });
+    this.snackBar
+      .open("Added to the shopping cart.", "View cart", { duration: 4000 })
+      .afterDismissed().subscribe(info => {
+        if (info.dismissedByAction === true) {
+          this.router.navigate(['/cart']);
+        }
+      });
   };
-  
+
   ngOnDestroy = () => {
     this.subC.unsubscribe();
     this.subP.unsubscribe();
