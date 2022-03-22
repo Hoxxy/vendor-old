@@ -3,7 +3,7 @@ h1 {
 }
 
 .page-container {
-    max-width:1340px;
+    max-width: 1340px;
     margin: auto;
     padding: 30px;
     padding-bottom: 20%;
@@ -25,7 +25,7 @@ h1 {
 button#checkout {
     height: 50px;
     text-transform: uppercase;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 button#promocode {
@@ -39,7 +39,7 @@ button#promocode {
     font-family: 'Arial', sans-serif;
     font-size: 16px;
     margin-bottom: 25px;
-    color:rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .cart-item {
@@ -47,7 +47,7 @@ button#promocode {
 }
 
 mat-divider {
-    width:100%;
+    width: 100%;
     margin-bottom: 30px;
 }
 
@@ -68,22 +68,22 @@ mat-divider {
 .product-name {
     font-weight: bold;
     font-size: 16px;
-    
+
 }
 
 .product-category {
-    color:rgba(128, 11, 11, 0.8);
+    color: rgba(128, 11, 11, 0.8);
 }
 
 .product-remove {
     color: rgba(0, 0, 0, 0.5);
-    font-size:11px;
+    font-size: 11px;
     cursor: pointer;
 }
 
 .return-button, .return-button:visited {
     text-decoration: none;
-    color:rgb(0, 68, 255);
+    color: rgb(0, 68, 255);
     font-size: 18px;
 }
 
@@ -91,5 +91,5 @@ mat-divider {
     text-transform: uppercase;
     font-family: 'Arial', sans-serif;
     font-size: 14px;
-    color:rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
