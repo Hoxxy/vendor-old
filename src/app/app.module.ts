@@ -13,7 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './pages/product/product.component';
 import { UserProfileComponent } from './pages/user-profile/profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { QuantityControlComponent } from './components/quantity-control/quantity.component';
+import { QuantityControlComponent } from './components/quantity-control/quantity-control.component';
 import { UserHistoryComponent } from './pages/user-history/history.component';
 import { StarRatingModule } from 'angular-star-rating';
 import { WriteProductReviewComponent } from './components/write-product-review/write-product-review.component';
