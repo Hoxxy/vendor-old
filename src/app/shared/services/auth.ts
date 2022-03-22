@@ -13,23 +13,23 @@ interface Country {
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
 
 export class AuthService {
-    private userData : User;
-    private uid : string;
+    private userData: User;
+    private uid: string;
     countrySelect = new FormControl();
-    
-    countries : Country[] = [{value: "Serbia"}, {value: "Croatia"}, {value: "Austria"}];
+
+    countries: Country[] = [{ value: "Serbia" }, { value: "Croatia" }, { value: "Austria" }];
 
     constructor(
-        private _AngularFirestore: AngularFirestore, 
-        private _AngularFireAuth: AngularFireAuth,
-        private _Router: Router
+        private angularFirestore: AngularFirestore,
+        private angularFireAuth: AngularFireAuth,
+        private router: Router
     ) {
-        this._AngularFireAuth.authState.subscribe((user) => {
+        this.angularFireAuth.authState.subscribe((user) => {
             if (user) {
                 this.userData = user;
                 this.uid = user.uid;
@@ -45,23 +45,23 @@ export class AuthService {
         });
     }
 
-    ngOnInit() : void {
+    ngOnInit(): void {
     }
 
     public getUserFirestoreId() {
         return this.uid;
     }
 
-    userFirstName : string;
-    userLastName : string;
-    userDisplayName : string;
-    userEmail : string;
-    userPhone : string;
-    userAddress1 : string;
-    userAddress2 : string;
-    userCity : string;
-    userPostcode : string;
-    userCountry : string;
+    userFirstName: string;
+    userLastName: string;
+    userDisplayName: string;
+    userEmail: string;
+    userPhone: string;
+    userAddress1: string;
+    userAddress2: string;
+    userCity: string;
+    userPostcode: string;
+    userCountry: string;
 
     getUserData() {
         this.getFirestoreUserData(this.getUserFirestoreId()).subscribe(data => {
@@ -81,7 +81,7 @@ export class AuthService {
     }
 
     signUp(email: string, password: string, form: NgForm): void {
-        this._AngularFireAuth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
+        this.angularFireAuth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
             // Signed In
             this.userData = userCredential.user;
             this.uid = this.userData.uid;
@@ -105,7 +105,7 @@ export class AuthService {
                 showCancelButton: false,
                 confirmButtonText: "OK",
             }).then(() => {
-                this._Router.navigate(["/"]);
+                this.router.navigate(["/"]);
             });
         }).catch((error) => {
             console.error(error);
@@ -120,11 +120,11 @@ export class AuthService {
     }
 
     signIn(email: string, password: string): void {
-        this._AngularFireAuth.signInWithEmailAndPassword(email, password).then((userCredential) => {
+        this.angularFireAuth.signInWithEmailAndPassword(email, password).then((userCredential) => {
             // Signed In
             this.userData = userCredential.user;
             this.uid = this.userData.uid;
-            this._Router.navigate(["/"]);
+            this.router.navigate(["/"]);
         }).catch((error) => {
             console.error(error);
             Swal.fire({
@@ -138,23 +138,23 @@ export class AuthService {
     }
 
     updateUserDislayName(displayName: string): void {
-        this._AngularFireAuth.user.subscribe((result) => {
+        this.angularFireAuth.user.subscribe((result) => {
             if (result) {
                 result.updateProfile({ displayName: displayName });
-                this.userData.displayName = displayName; 
+                this.userData.displayName = displayName;
             };
         });
     }
-    
+
     get isUserSignedIn(): boolean {
         const user = JSON.parse(localStorage.getItem('user'));
 
         return (user !== null) ? true : false;
     }
 
-    updateUserData(uid: string, data: any) : Promise<void> {
+    updateUserData(uid: string, data: any): Promise<void> {
         return new Promise((resolve, reject) => {
-            this._AngularFirestore.firestore.collection("users").doc(uid).set(data)
+            this.angularFirestore.firestore.collection("users").doc(uid).set(data)
                 .then(() => {
                     resolve();
                 })
@@ -164,16 +164,16 @@ export class AuthService {
         });
     }
 
-    getFirestoreUserData(userId: string): Observable<any> {  
-        return this._AngularFirestore.collection("users").doc(userId).get();
+    getFirestoreUserData(userId: string): Observable<any> {
+        return this.angularFirestore.collection("users").doc(userId).get();
     }
 
-    signOut() : boolean {
-        var success : boolean = false;
+    signOut(): boolean {
+        var success: boolean = false;
 
-        this._AngularFireAuth.signOut().then(() => {
+        this.angularFireAuth.signOut().then(() => {
             success = true;
-          });
+        });
 
         return success;
     }

@@ -7,22 +7,22 @@ import { Product } from "src/app/model/product";
 @Injectable()
 export class ProductService {
 
-    constructor(public http: HttpClient) { }
+    constructor(private httpClient: HttpClient) { }
 
     public getProducts(dataURL: string) {
-        return this.http.get(dataURL)
+        return this.httpClient.get(dataURL)
             .pipe(
-                map(res => res), 
+                map(res => res),
                 catchError(this.handleError)
             );
     }
 
     private handleError(error: any) {
         return throwError(error.message);
-    }    
-    
+    }
+
     setProductImagePath = (product: Product): string => {
         let path: string = "./assets/images/product-" + product.id + ".jpg";
         return path;
-      }
+    }
 }

@@ -15,14 +15,14 @@ export class CartService {
     public shippingCost: number;
     public promoDeduction: number = 0;
 
-    constructor(private _productService: ProductService) {}
+    constructor(private productService: ProductService) { }
 
     loadCart = () => {
         this.cartListSubject
             .subscribe(res => {
                 this.cartList = res;
                 let total = 0;
-                for(let cart of this.cartList) {
+                for (let cart of this.cartList) {
                     total += cart.product.price * cart.quantity;
                 }
                 this.subtotal = total;
@@ -36,12 +36,12 @@ export class CartService {
 
     addToCart = (cart: CartItem) => {
         let current = this.cartListSubject.getValue();
-        let dup = current.find(c=>c.product.title === cart.product.title);
+        let dup = current.find(c => c.product.title === cart.product.title);
         if (dup) dup.quantity += cart.quantity;
         else current.push(cart);
         this.cartListSubject.next(current);
-        
-        cart.product.image = this._productService.setProductImagePath(cart.product);
+
+        cart.product.image = this.productService.setProductImagePath(cart.product);
     };
 
     reloadCart = (cartList: CartItem[]) => {
