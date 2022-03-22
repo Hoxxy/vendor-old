@@ -9,12 +9,11 @@ import { AuthService } from 'src/app/shared/services/auth';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public _authService: AuthService, private _Router: Router) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    if (this._authService.isUserSignedIn) {
-      this._Router.navigate(["/"]);
+    if (this.authService.isUserSignedIn) {
+      this.router.navigate(["/"]);
     }
   }
-
 }
