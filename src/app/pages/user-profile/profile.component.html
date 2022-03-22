@@ -2,118 +2,135 @@
     <div fxLayout="column" class="container" fxFlex="50">
         <div>
             <h1 style="margin-bottom:15px;">Your Profile</h1>
-                <div fxLayout="column">
-                    <form #form1="ngForm" (ngSubmit)="updateCredentials(form1)">
+            <div fxLayout="column">
+                <form #form1="ngForm" (ngSubmit)="updateCredentials(form1)">
 
-                        <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
-                            <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>E-mail address</mat-label>
-                                <input type="email" pattern="^([a-z0-9_.-]+)@([\da-z.-]+)\.([a-z.]{2,6})$" [(ngModel)]="this._AuthService.userEmail" matInput name="email" #emailInput="ngModel" required/>
-                                <mat-icon matSuffix>email</mat-icon>
-                                <mat-error *ngIf="emailInput.hasError('required')">This is a required field.</mat-error>
-                                <mat-error *ngIf="emailInput.hasError('pattern')">Incorrect e-mail address format.</mat-error>
-                            </mat-form-field>
-                        </div>
+                    <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>E-mail address</mat-label>
+                            <input type="email" pattern="^([a-z0-9_.-]+)@([\da-z.-]+)\.([a-z.]{2,6})$"
+                                [(ngModel)]="this.authService.userEmail" matInput name="email" #emailInput="ngModel"
+                                required />
+                            <mat-icon matSuffix>email</mat-icon>
+                            <mat-error *ngIf="emailInput.hasError('required')">This is a required field.</mat-error>
+                            <mat-error *ngIf="emailInput.hasError('pattern')">Incorrect e-mail address format.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
 
-                        <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-                            <mat-form-field appearance="outline" fxFlex="50">
-                                <mat-label>Password</mat-label>
-                                <input type="password" ngModel matInput name="password" #passwordInput="ngModel" minlength="8" required />
-                                <mat-icon matSuffix>lock</mat-icon>
-                                <mat-error *ngIf="passwordInput.hasError('minlength')">Password must contain at least 8 characters.</mat-error>
-                            </mat-form-field>
-                    
-                            <mat-form-field appearance="outline" fxFlex="50">
-                                <mat-label>Repeat pasword</mat-label>
-                                <input type="password" ngModel matInput name="passwordRepeat" #passwordInputRepeat="ngModel" />
-                                <mat-icon matSuffix>lock</mat-icon>
-                                <mat-error *ngIf="passwordInputRepeat.hasError('matched')">Passwords do not match.</mat-error>
-                            </mat-form-field>
-                        </div>
+                    <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                        <mat-form-field appearance="outline" fxFlex="50">
+                            <mat-label>Password</mat-label>
+                            <input type="password" ngModel matInput name="password" #passwordInput="ngModel"
+                                minlength="8" required />
+                            <mat-icon matSuffix>lock</mat-icon>
+                            <mat-error *ngIf="passwordInput.hasError('minlength')">Password must contain at least 8
+                                characters.</mat-error>
+                        </mat-form-field>
 
-                        <div fxLayout="row" fxLayoutGap="20px" style="padding-top:10px;">
-                            <button type="submit" mat-raised-button color="primary" fxFlex="100" [disabled]="!checkCredentialsFormValidity(form1)">Save Changes</button>
-                        </div>
+                        <mat-form-field appearance="outline" fxFlex="50">
+                            <mat-label>Repeat pasword</mat-label>
+                            <input type="password" ngModel matInput name="passwordRepeat"
+                                #passwordInputRepeat="ngModel" />
+                            <mat-icon matSuffix>lock</mat-icon>
+                            <mat-error *ngIf="passwordInputRepeat.hasError('matched')">Passwords do not match.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
 
-                    </form>
-                </div>
+                    <div fxLayout="row" fxLayoutGap="20px" style="padding-top:10px;">
+                        <button type="submit" mat-raised-button color="primary" fxFlex="100"
+                            [disabled]="!checkCredentialsFormValidity(form1)">Save Changes</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
         <div style="padding-bottom: 50px;">
             <h1 style="margin-top:50px; margin-bottom:15px;">Your Address</h1>
-                <div fxLayout="column">
-                    <form #form="ngForm" (ngSubmit)="updateAddress(form)">
+            <div fxLayout="column">
+                <form #form="ngForm" (ngSubmit)="updateAddress(form)">
 
-                        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" fxFlexFill>
-                            <mat-form-field appearance="outline" fxFlex="50">
-                                <mat-label>First Name</mat-label>
-                                <input type="text" [(ngModel)]="this._AuthService.userFirstName" matInput name="firstName" #firstNameInput="ngModel" />
-                                <mat-error *ngIf="firstNameInput.hasError('required')">This is a required field.</mat-error>
-                            </mat-form-field>
-                    
-                            <mat-form-field appearance="outline" fxFlex="50">
-                                <mat-label>Last Name</mat-label>
-                                <input type="text" [(ngModel)]="this._AuthService.userLastName" matInput name="lastName" #lastNameInput="ngModel" required/>
-                                <mat-error *ngIf="lastNameInput.hasError('required')">This is a required field.</mat-error>
-                            </mat-form-field>
-                        </div>
-        
-                        <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
-                            <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>Phone Number</mat-label>
-                                <input type="text" matInput [(ngModel)]="this._AuthService.userPhone" name="phone" #phoneInput="ngModel" required/>
-                                <mat-icon matSuffix>phone</mat-icon>
-                                <mat-error *ngIf="phoneInput.hasError('required')">This is a required field.</mat-error>
-                            </mat-form-field>
-                        </div>
-        
-                        <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-                            <mat-form-field appearance="outline" fxFlex="50">
-                                <mat-label>City</mat-label>
-                                <input type="city" ngModel matInput [(ngModel)]="this._AuthService.userCity" name="city" #cityInput="ngModel" />
-                                <mat-icon matSuffix>apartment</mat-icon>
-                                <mat-error *ngIf="cityInput.hasError('required')">This is a required field.</mat-error>
-                            </mat-form-field>
-                    
-                            <mat-form-field appearance="outline" fxFlex="50">
-                                <mat-label>Postcode</mat-label>
-                                <input type="text" ngModel matInput [(ngModel)]="this._AuthService.userPostcode" name="postcode" #postcodeInput="ngModel" required />
-                                <mat-icon matSuffix>apartment</mat-icon>
-                                <mat-error *ngIf="postcodeInput.hasError('required')">This is a required field.</mat-error>
-                            </mat-form-field>
-                        </div>
-        
-                        <div fxLayout="column" fxFlexFill>
-                            <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>Address</mat-label>
-                                <input type="email" matInput [(ngModel)]="this._AuthService.userAddress1" name="address1" #address1Input="ngModel" required/>
-                                <mat-icon matSuffix>home</mat-icon>
-                                <mat-error *ngIf="address1Input.hasError('required')">This is a required field.</mat-error>
-                            </mat-form-field>
-        
-                            <mat-form-field appearance="outline" fxFlex="100">
-                                <mat-label>Address (2nd line - optional)</mat-label>
-                                <input type="email" matInput [(ngModel)]="this._AuthService.userAddress2" name="address2" #address2Input="ngModel" />
-                            </mat-form-field>
-                        </div>
-        
-                        <div fxLayout="column" fxFlexFill>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Country</mat-label>
-                                <mat-select [formControl]="this._AuthService.countrySelect" required>
-                                    <mat-option *ngFor="let country of this._AuthService.countries" [value]="country.value">
-                                        {{country.value}}
-                                    </mat-option>
-                                </mat-select>
-                                <mat-error *ngIf="this._AuthService.countrySelect.hasError('required')">Please select your country.</mat-error>
-                            </mat-form-field>
-                        </div>
-        
-                        <div fxLayout="row" fxLayoutGap="20px" style="padding-top:10px;">
-                            <button type="submit" mat-raised-button color="primary" fxFlex="100" [disabled]="!checkAddressFormValidity(form)">Save Changes</button>
-                        </div>
-        
-                    </form>
-                </div>
+                    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px" fxFlexFill>
+                        <mat-form-field appearance="outline" fxFlex="50">
+                            <mat-label>First Name</mat-label>
+                            <input type="text" [(ngModel)]="this.authService.userFirstName" matInput name="firstName"
+                                #firstNameInput="ngModel" />
+                            <mat-error *ngIf="firstNameInput.hasError('required')">This is a required field.</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="50">
+                            <mat-label>Last Name</mat-label>
+                            <input type="text" [(ngModel)]="this.authService.userLastName" matInput name="lastName"
+                                #lastNameInput="ngModel" required />
+                            <mat-error *ngIf="lastNameInput.hasError('required')">This is a required field.</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Phone Number</mat-label>
+                            <input type="text" matInput [(ngModel)]="this.authService.userPhone" name="phone"
+                                #phoneInput="ngModel" required />
+                            <mat-icon matSuffix>phone</mat-icon>
+                            <mat-error *ngIf="phoneInput.hasError('required')">This is a required field.</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                        <mat-form-field appearance="outline" fxFlex="50">
+                            <mat-label>City</mat-label>
+                            <input type="city" ngModel matInput [(ngModel)]="this.authService.userCity" name="city"
+                                #cityInput="ngModel" />
+                            <mat-icon matSuffix>apartment</mat-icon>
+                            <mat-error *ngIf="cityInput.hasError('required')">This is a required field.</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="50">
+                            <mat-label>Postcode</mat-label>
+                            <input type="text" ngModel matInput [(ngModel)]="this.authService.userPostcode"
+                                name="postcode" #postcodeInput="ngModel" required />
+                            <mat-icon matSuffix>apartment</mat-icon>
+                            <mat-error *ngIf="postcodeInput.hasError('required')">This is a required field.</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="column" fxFlexFill>
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Address</mat-label>
+                            <input type="email" matInput [(ngModel)]="this.authService.userAddress1" name="address1"
+                                #address1Input="ngModel" required />
+                            <mat-icon matSuffix>home</mat-icon>
+                            <mat-error *ngIf="address1Input.hasError('required')">This is a required field.</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" fxFlex="100">
+                            <mat-label>Address (2nd line - optional)</mat-label>
+                            <input type="email" matInput [(ngModel)]="this.authService.userAddress2" name="address2"
+                                #address2Input="ngModel" />
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="column" fxFlexFill>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Country</mat-label>
+                            <mat-select [formControl]="this.authService.countrySelect" required>
+                                <mat-option *ngFor="let country of this.authService.countries" [value]="country.value">
+                                    {{country.value}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="this.authService.countrySelect.hasError('required')">Please select your
+                                country.</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutGap="20px" style="padding-top:10px;">
+                        <button type="submit" mat-raised-button color="primary" fxFlex="100"
+                            [disabled]="!checkAddressFormValidity(form)">Save Changes</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
 </div>

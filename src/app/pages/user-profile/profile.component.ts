@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth';
 import Swal from 'sweetalert2';
 
@@ -9,35 +9,33 @@ import Swal from 'sweetalert2';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent {
   constructor(
-    public _AuthService: AuthService,
-    private _AngularFireAuth: AngularFireAuth
-  ) {}
-
-  ngOnInit(): void {}
+    public authService: AuthService,
+    private angularFireAuth: AngularFireAuth
+  ) { }
 
   checkAddressFormValidity(form: NgForm): boolean {
     var isFormValid: boolean = true;
 
     Object.keys(form.controls).forEach(id => {
-      if(form.controls[id].hasError('required') || form.controls[id].hasError('pattern')) isFormValid = false;
+      if (form.controls[id].hasError('required') || form.controls[id].hasError('pattern')) isFormValid = false;
     });
-    return isFormValid && !this._AuthService.countrySelect.hasError('required');
+    return isFormValid && !this.authService.countrySelect.hasError('required');
   }
 
   checkCredentialsFormValidity(form: NgForm): boolean {
     var isFormValid: boolean = true;
 
     Object.keys(form.controls).forEach(id => {
-      if(form.controls[id].hasError('required') || form.controls[id].hasError('pattern')) isFormValid = false;
+      if (form.controls[id].hasError('required') || form.controls[id].hasError('pattern')) isFormValid = false;
     });
 
     return isFormValid && !form.controls["password"]?.hasError("minlength") && !form.controls["passwordRepeat"]?.hasError("matched");
   }
 
   updateCredentials(form: NgForm): void {
-    this._AngularFireAuth.user.subscribe(result => {
+    this.angularFireAuth.user.subscribe(result => {
       result.updateEmail(form.controls["email"].value).then(() => {
         result.updatePassword(form.controls["password"].value).then(() => {
           Swal.fire({
@@ -50,7 +48,7 @@ export class UserProfileComponent implements OnInit {
         }).catch((error) => {
           Swal.fire({
             title: "Error",
-            text: "Error updating password: "+error,
+            text: "Error updating password: " + error,
             icon: "error",
             showCancelButton: false,
             confirmButtonText: "OK"
@@ -59,7 +57,7 @@ export class UserProfileComponent implements OnInit {
       }).catch((error) => {
         Swal.fire({
           title: "Error",
-          text: "Error updating e-mail: "+error,
+          text: "Error updating e-mail: " + error,
           icon: "error",
           showCancelButton: false,
           confirmButtonText: "OK"
@@ -69,7 +67,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   updateAddress(form: NgForm): void {
-    this._AuthService.updateUserData(this._AuthService.getUserFirestoreId(), {
+    this.authService.updateUserData(this.authService.getUserFirestoreId(), {
       "firstName": form.controls["firstName"].value,
       "lastName": form.controls["lastName"].value,
       "phone": form.controls["phone"].value,
@@ -79,11 +77,11 @@ export class UserProfileComponent implements OnInit {
       "address2": form.controls["address2"].value
     }).then(() => {
       Swal.fire({
-          title: "Success!",
-          text: "Your address information has been successfully updated.",
-          icon: "success",
-          showCancelButton: false,
-          confirmButtonText: "OK"
+        title: "Success!",
+        text: "Your address information has been successfully updated.",
+        icon: "success",
+        showCancelButton: false,
+        confirmButtonText: "OK"
       });
     })
   }
