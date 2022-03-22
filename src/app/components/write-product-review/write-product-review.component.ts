@@ -11,7 +11,7 @@ import { ReviewService } from 'src/app/shared/services/review.service';
 export class WriteProductReviewComponent {
 
   productPurchased: boolean;
-  productId: number;
+  private productId: number;
 
   constructor(
     private reviewService: ReviewService,
@@ -21,11 +21,11 @@ export class WriteProductReviewComponent {
       productId: number
     }
   ) {
-    this.productPurchased = this.data.productPurchased;
-    this.productId = this.data.productId;
+    this.productPurchased = data.productPurchased;
+    this.productId = data.productId;
   }
 
-  submitReview(reviewText: String): void {
+  submitReview = (reviewText: String) => {
     let rating: number = 0;
     for (let i = 0; i <= 5; i++) {
       if (document.getElementById("ratingRef").getElementsByClassName("value-" + i).item(0) !== null) {

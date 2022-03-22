@@ -7,6 +7,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { _isNumberValue } from '@angular/cdk/coercion';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shop',
@@ -15,8 +16,8 @@ import { _isNumberValue } from '@angular/cdk/coercion';
 })
 export class ShopComponent implements OnInit {
 
-  private subC: any;
-  private subP: any;
+  private subC: Subscription;
+  private subP: Subscription;
   public currentCategory: Category = new Category();
   public productList: Array<Product>;
   public paramCategory: any = null;
@@ -34,12 +35,10 @@ export class ShopComponent implements OnInit {
       this.paramCategory = params['category'];
       this.paramPrice = params['price']
 
-      if (_isNumberValue(this.paramCategory)) {
+      if (_isNumberValue(this.paramCategory))
         this.getCategoryById(this.paramCategory as unknown as number);
-      }
-      else {
+      else
         this.getCategoryByName(this.paramCategory);
-      }
 
       this.loadProducts();
 
@@ -47,36 +46,33 @@ export class ShopComponent implements OnInit {
   }
 
   getCategoryById = (id: number) => {
-    this.subC = this.categoryService.getCategories('./assets/mock-data/categories.json')
-      .subscribe(res => {
-        this.currentCategory = res[id - 1];
-      })
+    this.subC = this.categoryService.getCategories('./assets/mock-data/categories.json').subscribe(res => {
+      this.currentCategory = res[id - 1];
+    })
   }
 
   getCategoryByName = (name: string) => {
-    this.subC = this.categoryService.getCategories('./assets/mock-data/categories.json')
-      .subscribe(res => {
-        let categoryList: Array<any> = res as Array<Category>;
-        this.currentCategory = categoryList.find(categoryItem => categoryItem.idReadable === name.toLowerCase());
-      })
+    this.subC = this.categoryService.getCategories('./assets/mock-data/categories.json').subscribe(res => {
+      let categoryList: Array<any> = res as Array<Category>;
+      this.currentCategory = categoryList.find(categoryItem => categoryItem.idReadable === name.toLowerCase());
+    })
   }
 
   loadProducts = (price?: any) => {
-    this.subP = this.productService.getProducts('./assets/mock-data/products.json')
-      .subscribe(res => {
-        this.productList = res as Array<Product>;
+    this.subP = this.productService.getProducts('./assets/mock-data/products.json').subscribe(res => {
+      this.productList = res as Array<Product>;
 
-        if (this.paramCategory) {
-          this.productList = this.productList.filter(item => item.category == this.currentCategory.id);
-        }
+      if (this.paramCategory) {
+        this.productList = this.productList.filter(item => item.category == this.currentCategory.id);
+      }
 
-        if (this.paramPrice === "cheap") {
-          this.productList = this.productList.filter(item => item.price < 200.0)
-        }
-        else if (this.paramPrice === "premium") {
-          this.productList = this.productList.filter(item => item.price >= 200.0)
-        }
-      });
+      if (this.paramPrice === "cheap") {
+        this.productList = this.productList.filter(item => item.price < 200.0)
+      }
+      else if (this.paramPrice === "premium") {
+        this.productList = this.productList.filter(item => item.price >= 200.0)
+      }
+    });
   }
 
   addToCart = (product: Product) => {
