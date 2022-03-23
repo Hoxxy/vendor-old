@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth';
+import { AuthService } from 'src/app/user/auth.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import Swal from 'sweetalert2';
 

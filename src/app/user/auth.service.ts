@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl, NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { User } from 'src/app/model/user';
+import { User } from 'src/app/user/user.model';
 
 
 interface Country {

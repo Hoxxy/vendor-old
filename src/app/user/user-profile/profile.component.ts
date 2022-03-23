@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
-import { AuthService } from 'src/app/shared/services/auth';
+import { AuthService } from 'src/app/user/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({

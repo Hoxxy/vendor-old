@@ -1,4 +1,4 @@
-import { Product } from "./product";
+import { Product } from "../products/product.model";
 
 export class Order {
     id: number;

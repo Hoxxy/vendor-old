@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth';
+import { AuthService } from 'src/app/user/auth.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 
 @Component({

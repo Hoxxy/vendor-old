@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Review } from 'src/app/model/review';
 import Swal from 'sweetalert2';
-import { AuthService } from './auth';
+import { AuthService } from '../../user/auth.service';
 
 @Injectable({
   providedIn: 'root'

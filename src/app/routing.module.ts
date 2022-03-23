@@ -1,14 +1,14 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { LoginComponent } from "./pages/login/login.component";
-import { SignupComponent } from "./pages/signup/signup.component";
+import { LoginComponent } from "./user/login/login.component";
+import { SignupComponent } from "./user/signup/signup.component";
 import { HomepageComponent } from "./pages/homepage/homepage.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
-import { ProductComponent } from "./pages/product/product.component";
-import { UserHistoryComponent } from "./pages/user-history/history.component";
-import { UserProfileComponent } from "./pages/user-profile/profile.component";
+import { ProductComponent } from "./products/product.component";
+import { UserHistoryComponent } from "./user/user-history/history.component";
+import { UserProfileComponent } from "./user/user-profile/profile.component";
 import { CartComponent } from "./pages/cart/cart.component";
-import { SignoutComponent } from "./pages/signout/signout.component";
+import { SignoutComponent } from "./user/signout/signout.component";
 import { ShopComponent } from "./pages/shop/shop.component";
 import { CheckoutComponent } from "./pages/checkout/checkout.component";
 

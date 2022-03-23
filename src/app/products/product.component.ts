@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { WriteProductReviewComponent } from '../../components/write-product-review/write-product-review.component';
-import { Product } from 'src/app/model/product';
+import { WriteProductReviewComponent } from '../components/write-product-review/write-product-review.component';
+import { Product } from 'src/app/products/product.model';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { ReviewService } from 'src/app/shared/services/review.service';
-import { AuthService } from 'src/app/shared/services/auth';
+import { AuthService } from 'src/app/user/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 

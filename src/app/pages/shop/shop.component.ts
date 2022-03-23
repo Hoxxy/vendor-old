@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
-import { Product } from 'src/app/model/product';
+import { Product } from 'src/app/products/product.model';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { CategoryService } from 'src/app/shared/services/category.service';

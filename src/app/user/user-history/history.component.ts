@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatTableDataSource } from '@angular/material/table';
 import { Order } from 'src/app/model/order';
-import { Product } from 'src/app/model/product';
+import { Product } from 'src/app/products/product.model';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
